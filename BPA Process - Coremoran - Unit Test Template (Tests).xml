@@ -1,0 +1,600 @@
+﻿<process name="Coremoran - Unit Test Template (Tests)" version="1.0" bpversion="6.10.3.47902" narrative="TODO:&#xD;&#xA;1. Add a page for each test and the pages in a sequence here" byrefcollection="true" preferredid="0f49fa41-2241-46e8-879a-79bb2e8a43b7">
+  <view>
+    <camerax>-135</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <subsheet subsheetid="bccb090f-6b88-4ec3-910b-d11ca695617c" type="Normal" published="False">
+    <name>Append Result</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="f34e7aa7-5865-4604-bb87-76ce9135c612" type="Normal" published="False">
+    <name>Setup Test</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="53be4310-198c-4b8b-90b6-6269c86191ac" type="Normal" published="False">
+    <name>Teardown Test</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="1096a7c0-44b6-48b6-870a-3c82264c00e5" type="Normal" published="False">
+    <name>Example Test</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>42</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="388c539c-a2f7-4428-8520-c123c1dc33c8" type="Normal" published="False">
+    <name>Exception Test</name>
+    <view>
+      <camerax>32</camerax>
+      <cameray>75</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <stage stageid="1dd7f9e2-556b-4cb2-9fc6-13cbe8e08f9b" name="Start" type="Start">
+    <display x="15" y="-105" />
+    <onsuccess>8b28632b-5ddb-4cc4-b176-4724483fa212</onsuccess>
+  </stage>
+  <stage stageid="0c03f92b-39eb-4c52-9198-efd9535964a8" name="End" type="End">
+    <display x="15" y="75" />
+    <outputs>
+      <output type="collection" name="TestResult" stage="TestResult" />
+    </outputs>
+  </stage>
+  <stage stageid="ac32b0cc-0eb2-43a6-b8c6-434f7c7468c2" name="Stage1" type="ProcessInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="fe945529-bf67-41fd-85be-faca7080b5d1" name="Append Result" type="SubSheetInfo">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <narrative>Call this method to create a record according to the test result.</narrative>
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="19f31bc6-f56e-4be1-9aea-6253b19129d0" name="Start" type="Start">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <display x="-15" y="-135" />
+    <inputs>
+      <input type="text" name="TestName" stage="TestName" />
+      <input type="flag" name="Success?" stage="Success?" />
+      <input type="text" name="ErrorMessage" stage="Error" />
+    </inputs>
+    <onsuccess>28a010e9-5a55-4294-8723-fdb751ddb023</onsuccess>
+  </stage>
+  <stage stageid="af10aa7c-5e2a-4679-86b4-be9ab4289e4b" name="End" type="End">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <display x="-15" y="45" />
+  </stage>
+  <stage stageid="28a010e9-5a55-4294-8723-fdb751ddb023" name="Result Add Row" type="Action">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-15" y="-90" />
+    <inputs>
+      <input type="text" name="Collection Name" friendlyname="Collection Name" narrative="The name of the collection to act upon" expr="&quot;TestResult&quot;" />
+    </inputs>
+    <onsuccess>fae2ae11-4b68-4ea7-8b9d-7ed2f6e46b18</onsuccess>
+    <resource object="Blueprism.AutomateProcessCore.clsCollectionActions" action="Add Row" />
+  </stage>
+  <stage stageid="44499d41-9c8b-472a-a036-f61464107c2d" name="Fill TestName, Success" type="MultipleCalculation">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-75" y="0" />
+    <onsuccess>3354ae35-6a37-4a27-b66d-bcdf0b435fe1</onsuccess>
+    <steps>
+      <calculation expression="[TestName]" stage="TestResult.Test" />
+      <calculation expression="[Success?]" stage="TestResult.Success?" />
+    </steps>
+  </stage>
+  <stage stageid="4a191c64-d2ce-4016-a311-c716aab32748" name="Fill TestName, Success, Error" type="MultipleCalculation">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="45" y="0" />
+    <onsuccess>722e6c47-7cb3-47a0-bed2-db1de4369ac8</onsuccess>
+    <steps>
+      <calculation expression="[TestName]" stage="TestResult.Test" />
+      <calculation expression="[Success?]" stage="TestResult.Success?" />
+      <calculation expression="[Error]" stage="TestResult.Error message" />
+    </steps>
+  </stage>
+  <stage stageid="fae2ae11-4b68-4ea7-8b9d-7ed2f6e46b18" name="Failed?" type="Decision">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <display x="-15" y="-45" />
+    <decision expression="[Success?]=False" />
+    <ontrue>a861a01a-9feb-4adc-86e7-82199124a814</ontrue>
+    <onfalse>89f8854d-111b-4829-9e57-e12866406f97</onfalse>
+  </stage>
+  <stage stageid="89f8854d-111b-4829-9e57-e12866406f97" name="Anchor3" type="Anchor">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-75" y="-45" w="10" h="10" />
+    <onsuccess>44499d41-9c8b-472a-a036-f61464107c2d</onsuccess>
+  </stage>
+  <stage stageid="a861a01a-9feb-4adc-86e7-82199124a814" name="Anchor4" type="Anchor">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="45" y="-45" w="10" h="10" />
+    <onsuccess>4a191c64-d2ce-4016-a311-c716aab32748</onsuccess>
+  </stage>
+  <stage stageid="722e6c47-7cb3-47a0-bed2-db1de4369ac8" name="Anchor5" type="Anchor">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="45" y="45" w="10" h="10" />
+    <onsuccess>af10aa7c-5e2a-4679-86b4-be9ab4289e4b</onsuccess>
+  </stage>
+  <stage stageid="3354ae35-6a37-4a27-b66d-bcdf0b435fe1" name="Anchor6" type="Anchor">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-75" y="45" w="10" h="10" />
+    <onsuccess>af10aa7c-5e2a-4679-86b4-be9ab4289e4b</onsuccess>
+  </stage>
+  <stage stageid="ab5a087f-0588-4d1e-a00a-c940210534fe" name="TestName" type="Data">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <display x="-195" y="-15" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="e6d97922-293a-46a3-be95-426686559b4c" name="Success?" type="Data">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <display x="-195" y="15" w="120" h="30" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="da5f62bf-5624-4c72-8bae-799e00bea795" name="Error" type="Data">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <display x="-195" y="45" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="c96c8922-a062-49e6-9716-fb3fdb189933" name="Input" type="Block">
+    <subsheetid>bccb090f-6b88-4ec3-910b-d11ca695617c</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="-45" w="150" h="120" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="bc9ddb47-2f0f-4842-8ed0-153a8cca1ed8" name="TestResult" type="Collection">
+    <display x="-195" y="0" w="120" h="60" />
+    <datatype>collection</datatype>
+    <alwaysinit />
+    <collectioninfo>
+      <field name="Test" type="text" description="Shows the name of the test." />
+      <field name="Success?" type="flag" description="Shows if the test succeeded or failed." />
+      <field name="Error message" type="text" description="If Success = False: Shows error message" />
+    </collectioninfo>
+  </stage>
+  <stage stageid="36bd8ffe-e908-4dd1-8ed3-44363379aa07" name="Example Test" type="SubSheetInfo">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <narrative>TODO:
+1. Set action name and "Test Name" to the same test name
+2. Define expected DataType and value. Add more fields if needed
+3. Define additional arrange steps (if needed)
+4. Call the "Action under Test"
+5. Verify the expected and the actual results</narrative>
+    <display x="-195" y="-105" w="240" h="90" />
+  </stage>
+  <stage stageid="f67ee56d-b0e5-4841-92b5-7a575e0aae6c" name="Start" type="Start">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <display x="15" y="-105" />
+    <onsuccess>63121853-0aad-4769-8059-e64a730d6884</onsuccess>
+  </stage>
+  <stage stageid="dbb804d4-d169-409b-a082-a8729d42ed5f" name="End" type="End">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <display x="15" y="300" />
+  </stage>
+  <stage stageid="6810177e-cd5c-4327-aea0-6a754ebd61c7" name="Recover1" type="Recover">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit />
+    <display x="285" y="255" />
+    <onsuccess>13dc8e6a-715c-4533-876a-bbcef464f1ba</onsuccess>
+  </stage>
+  <stage stageid="3ad57ea0-fcf4-418b-b7ff-caaccadc35aa" name="Resume1" type="Resume">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit />
+    <display x="105" y="255" />
+    <onsuccess>76aa9a80-3897-4926-9a60-3debc271516b</onsuccess>
+  </stage>
+  <stage stageid="13dc8e6a-715c-4533-876a-bbcef464f1ba" name="Append Result" type="SubSheet">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="195" y="255" />
+    <inputs>
+      <input type="text" name="TestName" friendlyname="TestName" expr="[Test Name]" />
+      <input type="flag" name="Success?" friendlyname="Success?" expr="False" />
+      <input type="text" name="ErrorMessage" friendlyname="ErrorMessage" expr="ExceptionDetail()" />
+    </inputs>
+    <onsuccess>3ad57ea0-fcf4-418b-b7ff-caaccadc35aa</onsuccess>
+    <processid>bccb090f-6b88-4ec3-910b-d11ca695617c</processid>
+  </stage>
+  <stage stageid="e5d26c27-898a-45e4-8fe6-9ca63688af92" name="Append Result" type="SubSheet">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="210" />
+    <inputs>
+      <input type="text" name="TestName" friendlyname="TestName" expr="[Test Name]" />
+      <input type="flag" name="Success?" friendlyname="Success?" expr="True" />
+      <input type="text" name="ErrorMessage" friendlyname="ErrorMessage" expr="" />
+    </inputs>
+    <onsuccess>76aa9a80-3897-4926-9a60-3debc271516b</onsuccess>
+    <processid>bccb090f-6b88-4ec3-910b-d11ca695617c</processid>
+  </stage>
+  <stage stageid="082403d7-53fb-428f-9446-5e7d0f730c47" name="Test Name" type="Data">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-195" y="-15" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">TODO: Example Test</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="b1fab84e-2379-4710-ad30-b917e8b7e112" name="Act" type="Note">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <narrative>TODO: Call test action</narrative>
+    <display x="15" y="75" />
+    <onsuccess>c3496b75-03fc-429b-87ca-5ac2fa51867b</onsuccess>
+  </stage>
+  <stage stageid="8b28632b-5ddb-4cc4-b176-4724483fa212" name="Example Test" type="SubSheet">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-45" />
+    <onsuccess>07c92003-5a59-4e52-891b-642ab4c72bc0</onsuccess>
+    <processid>1096a7c0-44b6-48b6-870a-3c82264c00e5</processid>
+  </stage>
+  <stage stageid="6d5df48c-a2c8-408d-8344-0c8cbd51bc60" name="Exception Test" type="SubSheetInfo">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <narrative>TODO:
+1. Set action name and "Test Name" to the same test name
+2. Define expected exception type and key part of the exception message
+3. Define additional arrange steps (if needed)
+4. Call the "Action under Test"
+5. Verify the thrown exception</narrative>
+    <display x="-195" y="-105" w="240" h="90" />
+  </stage>
+  <stage stageid="ababbd33-5b27-4a22-bf74-3b0735f66d6e" name="Start" type="Start">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <display x="15" y="-105" />
+    <onsuccess>385a556a-6dc4-45d4-98c2-c724d7a37cb9</onsuccess>
+  </stage>
+  <stage stageid="909cd495-57c6-4fc1-b6c4-3d641a7d17da" name="End" type="End">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <display x="15" y="225" />
+  </stage>
+  <stage stageid="a9f579b4-665a-4c8a-bf54-599237ea19e9" name="Test Name" type="Data">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-195" y="-15" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">TODO: Exception Test</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="145e5dac-4374-43b6-94bb-2387977dfa2b" name="ExpectedMessage" type="Data">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-195" y="60" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">TODO: Part of message text</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="6889172d-345d-4c95-880a-4f0cc425d89c" name="ActualMessage" type="Data">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-195" y="165" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="f023f63e-cc46-49ed-88cb-988d3a06cd38" name="Anchor1" type="Anchor">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="120" y="180" w="10" h="10" />
+    <onsuccess>ab30d626-4181-4bb6-b4cb-abb65657ee84</onsuccess>
+  </stage>
+  <stage stageid="aa149083-fa3f-41a6-aa31-50fc7148053c" name="Recover1" type="Recover">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit />
+    <display x="120" y="-75" />
+    <onsuccess>5f9daefa-77ce-4b3b-af7b-1ce00590e0f9</onsuccess>
+  </stage>
+  <stage stageid="c7114a92-ec7c-4253-8669-2ee023056cd2" name="Resume1" type="Resume">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit />
+    <display x="120" y="15" />
+    <onsuccess>ff339a46-4fb3-4d0f-9ef4-16aebdd14762</onsuccess>
+  </stage>
+  <stage stageid="7caccefe-9fc5-47f6-9c1d-3b2dc3376be2" name="Append Result" type="SubSheet">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="120" y="135" />
+    <inputs>
+      <input type="text" name="TestName" friendlyname="TestName" expr="[Test Name]" />
+      <input type="flag" name="Success?" friendlyname="Success?" expr="True" />
+      <input type="text" name="ErrorMessage" friendlyname="ErrorMessage" expr="" />
+    </inputs>
+    <onsuccess>f023f63e-cc46-49ed-88cb-988d3a06cd38</onsuccess>
+    <processid>bccb090f-6b88-4ec3-910b-d11ca695617c</processid>
+  </stage>
+  <stage stageid="09ba21ba-86b1-4d10-a497-9f4ced6d261b" name="Append Result" type="SubSheet">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="135" />
+    <inputs>
+      <input type="text" name="TestName" friendlyname="TestName" expr="[Test Name]" />
+      <input type="flag" name="Success?" friendlyname="Success?" expr="False" />
+      <input type="text" name="ErrorMessage" friendlyname="ErrorMessage" expr="&quot;Action should throw an exception&quot;" />
+    </inputs>
+    <onsuccess>ab30d626-4181-4bb6-b4cb-abb65657ee84</onsuccess>
+    <processid>bccb090f-6b88-4ec3-910b-d11ca695617c</processid>
+  </stage>
+  <stage stageid="9752eaca-49dd-421e-be01-4b5060ab9386" name="Assert" type="Block">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="75" y="45" w="165" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="16bec37f-be27-41f3-ae5e-8729a5e2edef" name="Recover2" type="Recover">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit />
+    <display x="195" y="75" />
+    <onsuccess>7eccb559-778b-46b2-874c-1fc7de8d8bc1</onsuccess>
+  </stage>
+  <stage stageid="7eccb559-778b-46b2-874c-1fc7de8d8bc1" name="Append Result" type="SubSheet">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="195" y="135" />
+    <inputs>
+      <input type="text" name="TestName" friendlyname="TestName" expr="[Test Name]" />
+      <input type="flag" name="Success?" friendlyname="Success?" expr="False" />
+      <input type="text" name="ErrorMessage" friendlyname="ErrorMessage" expr="ExceptionDetail()" />
+    </inputs>
+    <onsuccess>0e4c0ead-d044-47d5-8983-f28ba0458533</onsuccess>
+    <processid>bccb090f-6b88-4ec3-910b-d11ca695617c</processid>
+  </stage>
+  <stage stageid="0e4c0ead-d044-47d5-8983-f28ba0458533" name="Resume2" type="Resume">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit />
+    <display x="195" y="180" />
+    <onsuccess>f023f63e-cc46-49ed-88cb-988d3a06cd38</onsuccess>
+  </stage>
+  <stage stageid="f19aafe1-be49-4887-9aba-4763b45edebe" name="ActualType" type="Data">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <display x="-195" y="195" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="7e6c948a-1427-4c55-bf7a-b19e26ff312e" name="ExpectedType" type="Data">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <display x="-195" y="90" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">TODO: Business Exception</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="5f9daefa-77ce-4b3b-af7b-1ce00590e0f9" name="Get Message and Type" type="MultipleCalculation">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="120" y="-30" />
+    <onsuccess>c7114a92-ec7c-4253-8669-2ee023056cd2</onsuccess>
+    <steps>
+      <calculation expression="ExceptionType()" stage="ActualType" />
+      <calculation expression="ExceptionDetail()" stage="ActualMessage" />
+    </steps>
+  </stage>
+  <stage stageid="ff339a46-4fb3-4d0f-9ef4-16aebdd14762" name="Assert expected exception" type="Action">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="120" y="75" />
+    <inputs>
+      <input type="text" name="TestName" friendlyname="TestName" expr="[Test Name]" />
+      <input type="text" name="Message" friendlyname="Message" expr="" />
+      <input type="text" name="ExpectedType" friendlyname="ExpectedType" expr="[ExpectedType]" />
+      <input type="text" name="ActualType" friendlyname="ActualType" expr="[ActualType]" />
+      <input type="text" name="ExpectedExecptionMessage" friendlyname="ExpectedExecptionMessage" expr="[ExpectedMessage]" />
+      <input type="text" name="ActualExceptionMessage" friendlyname="ActualExceptionMessage" expr="[ActualMessage]" />
+    </inputs>
+    <onsuccess>7caccefe-9fc5-47f6-9c1d-3b2dc3376be2</onsuccess>
+    <resource object="Coremoran - Unit - Assertions" action="ExpectedException" />
+  </stage>
+  <stage stageid="28b40825-8020-4897-9432-3764e76416c8" name="Setup Test" type="SubSheetInfo">
+    <subsheetid>f34e7aa7-5865-4604-bb87-76ce9135c612</subsheetid>
+    <narrative>Call this action before each test. This is the place to ensure the test environment, e.g. setup file system or database etc.</narrative>
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="3df9c566-a24c-4662-8292-41ac2c9b5ff8" name="Start" type="Start">
+    <subsheetid>f34e7aa7-5865-4604-bb87-76ce9135c612</subsheetid>
+    <display x="15" y="-105" />
+    <onsuccess>425fbdd5-ca06-48de-a8c6-e769785ca7db</onsuccess>
+  </stage>
+  <stage stageid="425fbdd5-ca06-48de-a8c6-e769785ca7db" name="End" type="End">
+    <subsheetid>f34e7aa7-5865-4604-bb87-76ce9135c612</subsheetid>
+    <display x="15" y="90" />
+  </stage>
+  <stage stageid="07fccc12-7b6c-45a0-9200-9b950ea5266c" name="Teardown Test" type="SubSheetInfo">
+    <subsheetid>53be4310-198c-4b8b-90b6-6269c86191ac</subsheetid>
+    <narrative>Call this action after each test. This is the place to cleanup the test environment. E.g. close handles, delete temporal files, etc.</narrative>
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="e54c3edf-b2ab-4844-a848-ee10268d4212" name="Start" type="Start">
+    <subsheetid>53be4310-198c-4b8b-90b6-6269c86191ac</subsheetid>
+    <display x="15" y="-105" />
+    <onsuccess>64fac822-b9d8-406b-bb5a-40cf0de03cec</onsuccess>
+  </stage>
+  <stage stageid="64fac822-b9d8-406b-bb5a-40cf0de03cec" name="End" type="End">
+    <subsheetid>53be4310-198c-4b8b-90b6-6269c86191ac</subsheetid>
+    <display x="15" y="90" />
+  </stage>
+  <stage stageid="63121853-0aad-4769-8059-e64a730d6884" name="Setup Test" type="SubSheet">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-60" />
+    <onsuccess>52bc6b26-0956-4b5b-8c0f-44e90aafa521</onsuccess>
+    <processid>f34e7aa7-5865-4604-bb87-76ce9135c612</processid>
+  </stage>
+  <stage stageid="76aa9a80-3897-4926-9a60-3debc271516b" name="Teardown Test" type="SubSheet">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="255" />
+    <onsuccess>dbb804d4-d169-409b-a082-a8729d42ed5f</onsuccess>
+    <processid>53be4310-198c-4b8b-90b6-6269c86191ac</processid>
+  </stage>
+  <stage stageid="52bc6b26-0956-4b5b-8c0f-44e90aafa521" name="Note1" type="Note">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <narrative>TODO: Arrange test here</narrative>
+    <display x="15" y="0" />
+    <onsuccess>b1fab84e-2379-4710-ad30-b917e8b7e112</onsuccess>
+  </stage>
+  <stage stageid="8d68e564-bf29-4225-8ef7-6e65dd2dde64" name="Arrange" type="Block">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-30" y="-30" w="90" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="cb1158f7-8b1f-487b-98c8-16701936be99" name="Act" type="Block">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-30" y="45" w="90" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="89451410-9fa1-42a4-8cf8-e36fb64d8695" name="Assert" type="Block">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-30" y="120" w="90" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="98e79ddb-1da4-4845-a6d5-32d1c13cfb77" name="local" type="Block">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="-45" w="150" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="454bc081-799d-4cca-90c9-bbc348961c25" name="Expected Result" type="Data">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-195" y="60" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue xml:space="preserve">TODO: Fill value here</initialvalue>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="02e7c46f-e948-46a6-b4a3-b3524d9d97f4" name="Expected" type="Block">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="30" w="150" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="b439defc-a9d3-482e-8d4a-99ca5a710641" name="Actual Result" type="Data">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-195" y="135" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="6542f360-618c-4eda-9076-7f0ae4cfbb2c" name="Actual" type="Block">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="105" w="150" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="07c92003-5a59-4e52-891b-642ab4c72bc0" name="Exception Test" type="SubSheet">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="15" />
+    <onsuccess>0c03f92b-39eb-4c52-9198-efd9535964a8</onsuccess>
+    <processid>388c539c-a2f7-4428-8520-c123c1dc33c8</processid>
+  </stage>
+  <stage stageid="085e9a98-6086-49d0-b2d7-191c60ffb164" name="out" type="Block">
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="-45" w="150" h="90" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="ab30d626-4181-4bb6-b4cb-abb65657ee84" name="Teardown Test" type="SubSheet">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="180" />
+    <onsuccess>909cd495-57c6-4fc1-b6c4-3d641a7d17da</onsuccess>
+    <processid>53be4310-198c-4b8b-90b6-6269c86191ac</processid>
+  </stage>
+  <stage stageid="65af6e83-8fc1-4ab2-88e5-b2e7a788e447" name="Act" type="Note">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <narrative>TODO: Call test action</narrative>
+    <display x="15" y="75" />
+    <onsuccess>09ba21ba-86b1-4d10-a497-9f4ced6d261b</onsuccess>
+  </stage>
+  <stage stageid="385a556a-6dc4-45d4-98c2-c724d7a37cb9" name="Setup Test" type="SubSheet">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-60" />
+    <onsuccess>81b96039-a7e4-4b9e-b403-37889c9a576f</onsuccess>
+    <processid>f34e7aa7-5865-4604-bb87-76ce9135c612</processid>
+  </stage>
+  <stage stageid="81b96039-a7e4-4b9e-b403-37889c9a576f" name="Note1" type="Note">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <narrative>TODO: Arrange test here</narrative>
+    <display x="15" y="0" />
+    <onsuccess>65af6e83-8fc1-4ab2-88e5-b2e7a788e447</onsuccess>
+  </stage>
+  <stage stageid="7aaad7e9-3173-490b-871a-b12055b42f18" name="Arrange" type="Block">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-30" y="-30" w="90" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="2e1ae71c-d052-48b5-b140-a3d05784f163" name="Act" type="Block">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-30" y="45" w="90" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="600a0ed3-c8c6-463e-829d-1ccd80503f1d" name="local" type="Block">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="-45" w="150" h="60" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="25144048-b27d-481b-b6df-61f4a738e560" name="Expected" type="Block">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="30" w="150" h="90" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="5f3ad6de-7e17-4b5b-81e0-f1a326d13ca7" name="Actual" type="Block">
+    <subsheetid>388c539c-a2f7-4428-8520-c123c1dc33c8</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="135" w="150" h="90" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="c3496b75-03fc-429b-87ca-5ac2fa51867b" name="TODO: Assert expected value" type="Action">
+    <subsheetid>1096a7c0-44b6-48b6-870a-3c82264c00e5</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="150" />
+    <inputs>
+      <input type="text" name="TestName" friendlyname="TestName" expr="[Test Name]" />
+      <input type="text" name="Message" friendlyname="Message" expr="" />
+      <input type="text" name="Expected" friendlyname="Expected" expr="[Expected Result]" />
+      <input type="text" name="Actual" friendlyname="Actual" expr="[Actual Result]" />
+    </inputs>
+    <onsuccess>e5d26c27-898a-45e4-8fe6-9ca63688af92</onsuccess>
+    <resource object="Coremoran - Unit - Assertions" action="AreEqual (Text)" />
+  </stage>
+</process>

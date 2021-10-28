@@ -1,0 +1,256 @@
+﻿<process name="Coremoran - Unit Test Template (Testsuite)" version="1.0" bpversion="6.10.3.47902" narrative="" byrefcollection="true" preferredid="5d6e4319-440a-4016-b376-7348dbafafa5">
+  <view>
+    <camerax>0</camerax>
+    <cameray>31</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <subsheet subsheetid="c5e5f121-7c9b-442e-8c53-e6365d9abadf" type="Normal" published="False">
+    <name>Append Partial Result</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>-21</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="f00a7d6a-9aff-47fb-8e8c-530bf7b71cc1" type="Normal" published="False">
+    <name>Setup Suite</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <subsheet subsheetid="193c5dc4-d561-45cf-927e-8877c40ee31e" type="Normal" published="False">
+    <name>Teardown Suite</name>
+    <view>
+      <camerax>0</camerax>
+      <cameray>0</cameray>
+      <zoom version="2">1.25</zoom>
+    </view>
+  </subsheet>
+  <stage stageid="6b26702d-ad8b-45aa-b7e7-08c3712bbaf3" name="Start" type="Start">
+    <display x="15" y="-105" />
+    <onsuccess>7b495fa8-813b-42a7-bdf7-e0f1d193f908</onsuccess>
+  </stage>
+  <stage stageid="99c93bda-726a-4327-8235-a830763831aa" name="End" type="End">
+    <display x="15" y="270" />
+  </stage>
+  <stage stageid="30ef3793-4e05-4dc3-885a-cf746185711a" name="Stage1" type="ProcessInfo">
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="593a88b6-49a0-4102-8ba5-db3fd841861e" name="Append Partial Result" type="SubSheetInfo">
+    <subsheetid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</subsheetid>
+    <narrative>Merge the tempResult into the global result collection</narrative>
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="405df65f-0d02-4bb0-aaae-39f07c3772d9" name="Start" type="Start">
+    <subsheetid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</subsheetid>
+    <display x="15" y="-105" />
+    <inputs>
+      <input type="text" name="Method" stage="Method" />
+      <input type="collection" name="TempResult" stage="TempResult" />
+    </inputs>
+    <onsuccess>45d59cab-ddf4-42c0-9269-8017405abd50</onsuccess>
+  </stage>
+  <stage stageid="36d59b76-1624-4a24-b1e3-20db957850b1" name="End" type="End">
+    <subsheetid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</subsheetid>
+    <display x="15" y="30" />
+  </stage>
+  <stage stageid="73bda4df-ecf1-4d52-9411-9ba02670b3dd" name="Method" type="Data">
+    <subsheetid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</subsheetid>
+    <display x="-195" y="-15" w="120" h="30" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="a3ade0bf-2e37-46a0-9a93-d3cc38c4aeb0" name="TempResult" type="Collection">
+    <subsheetid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</subsheetid>
+    <display x="-195" y="15" w="120" h="30" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="45d59cab-ddf4-42c0-9269-8017405abd50" name="Append Field (Text)" type="Action">
+    <subsheetid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-60" />
+    <inputs>
+      <input type="collection" name="Collection" friendlyname="Collection" narrative="The collection to append a field to." expr="[TempResult]" />
+      <input type="text" name="Field Name" friendlyname="Field Name" narrative="The name of the new field." expr="&quot;Method&quot;" />
+      <input type="text" name="Value" friendlyname="Value" narrative="The value to be put in the new field." expr="[Method]" />
+    </inputs>
+    <outputs>
+      <output type="collection" name="Appended Collection" friendlyname="Appended Collection" narrative="The collection with field appended." stage="TempResult" />
+    </outputs>
+    <onsuccess>cbc12b0d-91ed-47bb-b95e-977a3ae49400</onsuccess>
+    <resource object="Utility - Collection Manipulation" action="Append Field (Text)" />
+  </stage>
+  <stage stageid="cbc12b0d-91ed-47bb-b95e-977a3ae49400" name="Append Rows to Collection" type="Action">
+    <subsheetid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-15" />
+    <inputs>
+      <input type="collection" name="Main Collection" friendlyname="Main Collection" narrative="The collection to append to." expr="[TestResult]" />
+      <input type="collection" name="Collection to Append" friendlyname="Collection to Append" narrative="The collection to append." expr="[TempResult]" />
+    </inputs>
+    <outputs>
+      <output type="collection" name="Combined Collection" friendlyname="Combined Collection" narrative="The combined collection." stage="TestResult" />
+    </outputs>
+    <onsuccess>36d59b76-1624-4a24-b1e3-20db957850b1</onsuccess>
+    <resource object="Utility - Collection Manipulation" action="Append Rows to Collection" />
+  </stage>
+  <stage stageid="edd2a74b-390f-4631-91c7-b7674f1fc1c4" name="in" type="Block">
+    <subsheetid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</subsheetid>
+    <loginhibit onsuccess="true" />
+    <display x="-270" y="-45" w="150" h="90" />
+    <font family="Segoe UI" size="10" style="Regular" color="7FB2E5" />
+  </stage>
+  <stage stageid="1e2060b2-d535-4c4f-a3f6-bf12fd79f141" name="Append Partial Result" type="SubSheet">
+    <loginhibit onsuccess="true" />
+    <display x="105" y="-15" />
+    <inputs>
+      <input type="text" name="Method" friendlyname="Method" expr="&quot;TODO: Enter Action under test name here&quot;" />
+      <input type="collection" name="TempResult" friendlyname="TempResult" expr="[TempResult]" />
+    </inputs>
+    <onsuccess>70650416-11ab-4225-9d89-f3f4a0b569d8</onsuccess>
+    <processid>c5e5f121-7c9b-442e-8c53-e6365d9abadf</processid>
+  </stage>
+  <stage stageid="70650416-11ab-4225-9d89-f3f4a0b569d8" name="Anchor1" type="Anchor">
+    <loginhibit onsuccess="true" />
+    <display x="105" y="15" w="10" h="10" />
+    <onsuccess>476f4d47-ccde-4cc4-92f1-17338c7f0abb</onsuccess>
+  </stage>
+  <stage stageid="476f4d47-ccde-4cc4-92f1-17338c7f0abb" name="Anchor2" type="Anchor">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="15" w="10" h="10" />
+    <onsuccess>bd293965-67fe-4910-8b47-fa2911696d4b</onsuccess>
+  </stage>
+  <stage stageid="ca0aac1c-bf75-42ac-9df9-41c1fc5e98a9" name="Note1" type="Note">
+    <narrative>TODO: Call Test-Sub-Process</narrative>
+    <display x="15" y="-15" />
+    <onsuccess>1e2060b2-d535-4c4f-a3f6-bf12fd79f141</onsuccess>
+  </stage>
+  <stage stageid="bec5ba58-87bc-4e98-9d8d-fe96362c55e8" name="TestResult" type="Collection">
+    <display x="-195" y="0" w="150" h="60" />
+    <datatype>collection</datatype>
+    <alwaysinit />
+    <collectioninfo>
+      <field name="Method" type="text" />
+      <field name="Test" type="text" />
+      <field name="Success?" type="flag" />
+      <field name="Error Message" type="text" />
+    </collectioninfo>
+  </stage>
+  <stage stageid="23b8e4c6-3202-4a51-bc1c-3de0f3860d5e" name="TempResult" type="Collection">
+    <display x="-195" y="60" w="90" h="30" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="bd293965-67fe-4910-8b47-fa2911696d4b" name="Note2" type="Note">
+    <narrative>TODO: Call more tests ...</narrative>
+    <display x="15" y="45" />
+    <onsuccess>cdbab0ae-15cd-4c36-bbf3-08f5d21bd812</onsuccess>
+  </stage>
+  <stage stageid="cdbab0ae-15cd-4c36-bbf3-08f5d21bd812" name="Filter Errors For Log" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="90" />
+    <inputs>
+      <input type="collection" name="Collection In" friendlyname="Collection In" narrative="The collection to filter." expr="[TestResult]" />
+      <input type="text" name="Filter" friendlyname="Filter" narrative="The filter query." expr="&quot;[Success?] = False&quot;" />
+    </inputs>
+    <outputs>
+      <output type="collection" name="Collection Out" friendlyname="Collection Out" narrative="The filtered collection." stage="Errors" />
+    </outputs>
+    <onsuccess>d4786a1a-d9c2-4409-ae27-9602846a1bed</onsuccess>
+    <resource object="Utility - Collection Manipulation" action="Filter Collection" />
+  </stage>
+  <stage stageid="c18a3a38-95f8-4746-b036-0830b40e386e" name="Count" type="Data">
+    <display x="-195" y="120" w="90" h="30" />
+    <datatype>number</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="b1d779c1-654c-4237-a3d0-b6c7fe05a682" name="Errors" type="Collection">
+    <display x="-195" y="90" w="90" h="30" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="74aaa3f6-95a2-4be8-9a36-a489600cab5a" name="No Errors?" type="Decision">
+    <display x="15" y="180" />
+    <breakpoint type="0">
+      <condition>
+      </condition>
+    </breakpoint>
+    <decision expression="[Count]=0" />
+    <ontrue>6f374f37-d932-4fcf-b6b7-f0b7ecc0469d</ontrue>
+    <onfalse>466f9102-195f-4185-b064-837b58e3e50b</onfalse>
+  </stage>
+  <stage stageid="f0bc491b-9a83-4137-8541-2a78dd15c48d" name="Unit Exception" type="Exception">
+    <display x="195" y="180" />
+    <exception localized="yes" type="UnitException" detail="&quot;Errors found. Please check Log.&quot;" />
+  </stage>
+  <stage stageid="d4786a1a-d9c2-4409-ae27-9602846a1bed" name="Count Errors Rows" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="135" />
+    <inputs>
+      <input type="text" name="Collection Name" friendlyname="Collection Name" narrative="The name of the collection to act upon" expr="&quot;Errors&quot;" />
+    </inputs>
+    <outputs>
+      <output type="number" name="Count" friendlyname="Count" narrative="The number of rows counted in the collection" stage="Count" />
+    </outputs>
+    <onsuccess>74aaa3f6-95a2-4be8-9a36-a489600cab5a</onsuccess>
+    <resource object="Blueprism.AutomateProcessCore.clsCollectionActions" action="Count Rows" />
+  </stage>
+  <stage stageid="45d848fb-22bd-4ddb-a2a6-515c4f9f3761" name="Setup Suite" type="SubSheetInfo">
+    <subsheetid>f00a7d6a-9aff-47fb-8e8c-530bf7b71cc1</subsheetid>
+    <narrative>Call this action before each testsuite. This is the place to ensure the test environment, e.g. setup file system or database etc for the whole suite</narrative>
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="92282062-167b-4cf2-9957-3f7efe070e31" name="Start" type="Start">
+    <subsheetid>f00a7d6a-9aff-47fb-8e8c-530bf7b71cc1</subsheetid>
+    <display x="15" y="-105" />
+    <onsuccess>ff5d7f43-e9ee-4c64-8948-7aeeff5d84ca</onsuccess>
+  </stage>
+  <stage stageid="ff5d7f43-e9ee-4c64-8948-7aeeff5d84ca" name="End" type="End">
+    <subsheetid>f00a7d6a-9aff-47fb-8e8c-530bf7b71cc1</subsheetid>
+    <display x="15" y="90" />
+  </stage>
+  <stage stageid="765cb149-4db3-472d-94cd-13e92034909d" name="Teardown Suite" type="SubSheetInfo">
+    <subsheetid>193c5dc4-d561-45cf-927e-8877c40ee31e</subsheetid>
+    <narrative>Call this action after each testsuite. This is the place to cleanup the test environment. E.g. delete temporal files, etc.</narrative>
+    <display x="-195" y="-105" w="150" h="90" />
+  </stage>
+  <stage stageid="be431a06-3bfc-49aa-81aa-79f31d621ba2" name="Start" type="Start">
+    <subsheetid>193c5dc4-d561-45cf-927e-8877c40ee31e</subsheetid>
+    <display x="15" y="-105" />
+    <onsuccess>47a59cac-8b13-413d-962c-2a224888eaf6</onsuccess>
+  </stage>
+  <stage stageid="47a59cac-8b13-413d-962c-2a224888eaf6" name="End" type="End">
+    <subsheetid>193c5dc4-d561-45cf-927e-8877c40ee31e</subsheetid>
+    <display x="15" y="90" />
+  </stage>
+  <stage stageid="7b495fa8-813b-42a7-bdf7-e0f1d193f908" name="Setup Suite" type="SubSheet">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="-60" />
+    <onsuccess>ca0aac1c-bf75-42ac-9df9-41c1fc5e98a9</onsuccess>
+    <processid>f00a7d6a-9aff-47fb-8e8c-530bf7b71cc1</processid>
+  </stage>
+  <stage stageid="6f374f37-d932-4fcf-b6b7-f0b7ecc0469d" name="Teardown Suite" type="SubSheet">
+    <loginhibit onsuccess="true" />
+    <display x="15" y="225" />
+    <onsuccess>99c93bda-726a-4327-8235-a830763831aa</onsuccess>
+    <processid>193c5dc4-d561-45cf-927e-8877c40ee31e</processid>
+  </stage>
+  <stage stageid="466f9102-195f-4185-b064-837b58e3e50b" name="Teardown Suite" type="SubSheet">
+    <loginhibit onsuccess="true" />
+    <display x="105" y="180" />
+    <onsuccess>f0bc491b-9a83-4137-8541-2a78dd15c48d</onsuccess>
+    <processid>193c5dc4-d561-45cf-927e-8877c40ee31e</processid>
+  </stage>
+</process>
